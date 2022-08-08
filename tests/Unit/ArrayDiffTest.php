@@ -13,7 +13,7 @@ class ArrayDiffTest extends TestCase
      */
     public function test_the_array_difference_return_a_successful_response()
     {
-        $this->assertEquals([2], $this->ArrayDiff([1,2], [1]), "a was [1,2], b was [1], expected [2]");
+        $this->assertEquals([2], $this->ArrayDiff([1, 2], [1]), "a was [1,2], b was [1], expected [2]");
         $this->assertEquals([2, 2], $this->ArrayDiff([1, 2, 2], [1]), "a was [1,2,2], b was [1], expected [2,2]");
         $this->assertEquals([1], $this->ArrayDiff([1, 2, 2], [2]), "a was [1,2,2], b was [2], expected [1]");
         $this->assertEquals([1, 2, 2], $this->ArrayDiff([1, 2, 2], []), "a was [1,2,2], b was [], expected [1,2,2]");
@@ -30,21 +30,23 @@ class ArrayDiffTest extends TestCase
     protected function ArrayDiff(array $ArrayOne, array $ArrayTwo)
     {
         /**Solution one */
-        // foreach ($ArrayOne as $key => $value) {
-        //     foreach ($ArrayTwo as $valueTwo) {
-        //         if ($value != $valueTwo) {
-        //             unset($ArrayOne[$key]);
-        //         }
-        //     }
-        // }
-        // return $ArrayOne;
+        $result = [];
+
+        foreach ($ArrayOne as $key => $value) {
+            if (in_array($value, $ArrayTwo)) {
+                unset($ArrayOne[$key]);
+            }
+        }
+
+        foreach ($ArrayOne as $value) {
+            $result[] = $value;
+        }
+        return $result;
 
         /**Solution Two */
 
-        $result = array_diff($ArrayOne, $ArrayTwo);
+        // $result = array_diff($ArrayOne, $ArrayTwo);
 
-        var_dump($result);
-
-        return array_values($result);
+        // return array_values($result);
     }
 }
