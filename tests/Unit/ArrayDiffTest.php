@@ -30,14 +30,13 @@ class ArrayDiffTest extends TestCase
     protected function ArrayDiff(array $ArrayOne, array $ArrayTwo)
     {
         /**Solution one */
-        $result = [];
-
         foreach ($ArrayOne as $key => $value) {
             if (in_array($value, $ArrayTwo)) {
                 unset($ArrayOne[$key]);
             }
         }
 
+        $result = [];
         foreach ($ArrayOne as $value) {
             $result[] = $value;
         }
